@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>course</title>
+    <style>
+      .namebox {
+        margin-left: 40px;
+      }
+      textarea{
+        width: 300px;
+      }
+
+    </style>
+  </head>
+  <body>
+    <h1>Add a new course</h1>
+    <form action="course" method="POST">
+      {% csrf_token %}
+	    <p>Name:<input class="namebox" type="text" name="name"></p>
+      <p>Description:<textarea name="description" row="8" cols="20"></textarea></p>
+      <input type="submit" value="add">
+    </form>
+
+    <table class="courselist">
+      <tr>
+        <th>Course Name</th>
+        <th>Description</th>
+        <th>Date Added</th>
+        <th>Actions</th>
+      </tr>
+      {% for i in classes %}
+      <tr>
+        <td>{{i.name}}</td>
+        <td>{{i.description}}</td>
+        <td>{{i.created_at}}</td>
+
+        <td><a href="/destroy/{{i.id }}">Remove</td>
+      </tr>
+      {% endfor %}
+  </body>
+</html>
